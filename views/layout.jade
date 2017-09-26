@@ -14,7 +14,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Node.js Auth
+          a.navbar-brand(href='#') Voteyum
         div.collapse.navbar-collapse(id='bs-example-navbar-collapse-1')
           ul.nav.navbar-nav.navbar-right
             if (!user)
@@ -24,12 +24,13 @@ html
                 a(href='/register') Register
             if (user)
               li
-                a Welcome #{user.name}
+                a Logged in as #{user.firstname} #{user.lastname}
               li
                 a(href='/logout') Logout
 
     div.container
       div.content
         block content
+
 
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')

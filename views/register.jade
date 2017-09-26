@@ -4,7 +4,13 @@ block content
   .container
     form.form-signin(role='form', action="/register",method="post", style='max-width: 300px;')
       h2.form-signin-heading Sign Up here
-      input.form-control(type='text', name="name", placeholder='Your Name')
+      input.form-control(type='text', name="firstname", placeholder='Your First Name')
+      input.form-control(type='text', name="lastname", placeholder='Your Last Name')
       input.form-control(type='text', name="username", placeholder='Your Username')
       input.form-control(type='password', name="password", placeholder='Your Password')
+      select.form-control(name="state")
+        option(value='') Select your state
+        option(value='enthusiastic') Enthusiastic
+        option(value='content') Content
+        option(value='displeased') Displeased
       button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign Up
