@@ -7,11 +7,14 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var popdb = require('./populatedb');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/node-auth')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
+
+popdb();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
