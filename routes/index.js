@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var auth = require("../controllers/AuthController.js");
+var ballot = require("../controllers/BallotController.js");
 
 // restrict index for logged in user only
 router.get('/', auth.home);
@@ -19,5 +20,16 @@ router.post('/login', auth.doLogin);
 
 // route for logout action
 router.get('/logout', auth.logout);
+
+//route to ballot home
+router.get('/ballot', ballot.home);
+
+//route to create new ballot
+router.get('/newballot', ballot.createBallot);
+
+//route for new ballow action
+router.post('/newballot', ballot.doCreateBallot);
+
+router.get('/ballot/:ballotid', ballot.createContest);
 
 module.exports = router;
