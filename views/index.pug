@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  if (user)
+    h1 Welcome #{user.firstname}, please select a ballot for the state of #{user.state} below:
+    ul
+      li 
+        a(href='/newballot') Create Ballot
+  else
+    h1 Please login or register to continue

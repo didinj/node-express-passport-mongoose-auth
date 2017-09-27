@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .container
+    if (error)
+      h1.error #{error}
+    if (user)
+      if (mode == 'createballot')
+        form(role='form', action="/newballot",method="post", style='max-width: 300px;')
+          h2.form-signin-heading Create a new ballot
+          input.form-control(type='text', name="title", placeholder='Ballot Title')
+          input.form-control(type='text', name="ballotlevel", placeholder='Ballot Level')
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Create
+      if (mode == 'createcontest')
+        form(role='form', action="/newcontest",method="post", style='max-width: 300px;')
+          h2.form-signin-heading Create contest for #{ballot.title}
+          input(type='hidden', name='ballotId', value=ballot._id)
+          input.form-control(type='text', name="title", placeholder='Contest Title')
+          label.radio-label(for="type1") Simple Majority
+          input(id="type1", type="radio", name="contesttype", value=1, checked="")
+          label.radio-label(for="type2") Pick Two
+          input(id="type2", type="radio", name="contesttype", value=2, checked="")
+          label.radio-label(for="type3") Ranked Choice
+          input(id="type3", type="radio", name="contesttype", value=3, checked="")
+          input.form-control(type='text', name="typestring", placeholder='Type String')
+          textarea.form-control(name="typedesc", placeholder='Type Description')
+          button.btn.btn-lg.btn-primary.btn-block(type='submit') Create
+      if (mode == 'createoption')
+        h1 Create option for ballot #{ballot}
+      if (mode == 'vote')
+        h1 You're now casting your vote for Ballot 1
+    else
+      h1 Please login or register to continue
