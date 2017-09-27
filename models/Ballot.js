@@ -14,6 +14,7 @@ var VoteSchema = new Schema({
 var OptionSchema = new Schema({
 	description: String,
 	optiontype: Number,
+	value: Number,
 	votes: [VoteSchema]
 });
 
@@ -24,14 +25,13 @@ var OptionSchema = new Schema({
 var ContestSchema = new Schema({
 	title: String,
 	contesttype: Number,
-	typestring: String,
-	typedesc: String,
+	instructions: String,
+	description: String,
 	options: [OptionSchema]
 });
 
 var BallotSchema = new Schema({
 	title: String,
-    ballotlevel: String,
     contests: [ContestSchema]
 });
 
@@ -39,5 +39,5 @@ module.exports = {
 	Vote: mongoose.model('Vote', VoteSchema),
 	Option: mongoose.model('Option', OptionSchema),
 	Contest: mongoose.model('Contest', ContestSchema),
-	Ballot: mongoose.model('Ballot', Ballot)
-}
+	Ballot: mongoose.model('Ballot', BallotSchema)
+};

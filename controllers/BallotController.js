@@ -3,8 +3,8 @@ var passport = require("passport");
 var User = require("../models/User");
 var Ballot = require("../models/Ballot").Ballot;
 var Contest = require("../models/Ballot").Contest;
-var Option = require("..models/Ballot").Option;
-var Vote = require("..models/Ballot").Vote;
+var Option = require("../models/Ballot").Option;
+var Vote = require("../models/Ballot").Vote;
 
 var ballotController = {};
 
@@ -40,10 +40,32 @@ ballotController.createContest = function(req, res) {
 };
 
 ballotController.doCreateContest = function(req, res) {
+  Contest.create(new Contest({ title: req.body.title, contesttype: req.body.contesttype, typestring: req.body.typestring, typedesc: req.body.typedesc}), function(err, contest) {
+    console.log(contest, err);
+    if (err) {
+      return res.render('ballot', { error: err, mode: 'createcontest', ballot: ballot, user: req.user});
+    }else{
+      Ballot.findByIdAndUpdate(
+        req.body.ballotId,
+        {$push: {"contests": contest}},
+        {safe: true, new : true},
+        function(err, ballot) {
+            console.log(ballot, err);
+            if(err){
+              return res.render('ballot', { error: err, mode: 'createcontest', ballot: ballot, user: req.user});
+            }else if(ballot){
+              return res.render('ballot', {mode: 'createoption', ballot: ballot, user: req.user});
+            }
+        }
+      );
+    }
+  });
+
+
+
   Ballot.findById(req.params.ballotid, '', { lean: true }, function(err, ballot) {
     if (ballot) {
       
-      return res.render('ballot', { mode: 'createcontest', ballot: ballot, user: req.user});
     }else if (err) {
       return res.render('ballot', { error: err, user: user });
     }
