@@ -11,6 +11,7 @@ var VoteSchema = new Schema({
 //option types:
 //1. yes/no
 //2. ranking
+//value represents ranking position, not used for yes/no
 var OptionSchema = new Schema({
 	description: String,
 	optiontype: Number,
@@ -24,6 +25,7 @@ var OptionSchema = new Schema({
 //3. ranked choice
 var ContestSchema = new Schema({
 	title: String,
+	region: String,
 	contesttype: Number,
 	instructions: String,
 	description: String,
